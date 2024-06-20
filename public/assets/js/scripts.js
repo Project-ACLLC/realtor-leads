@@ -74,7 +74,7 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '', ag
                 if (headers[cellIndex] === 'Zillow Profile') {
                     table += `<td><button class="btn btn-link" onclick="window.open('${cell}', '_blank')">View Profile</button></td>`;
                 } else if (!['Facebook', 'Instagram', 'LinkedIn', 'Pinterest', 'Twitter', 'YouTube', 'Website', 'Blog'].includes(headers[cellIndex])) {
-                    table += `<td contenteditable="true" data-header="${headers[cellIndex]}">${cell}</td>`;
+                    table += `<td class="table-value" data-header="${headers[cellIndex]}">${cell}</td>`;
                 } 
             });
             table += `<td>
@@ -545,10 +545,9 @@ function updateForm() {
     });
 }
 
-
 function saveRow(index) {
     const row = document.getElementById(`row-${index}`);
-    const cells = row.querySelectorAll('td[contenteditable="true"]');
+    const cells = row.querySelectorAll('.table-value');
     const updatedData = { id: row.getAttribute('data-id') };
 
     cells.forEach(cell => {
