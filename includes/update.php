@@ -1,5 +1,4 @@
-<?
-
+<?php
 include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -17,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             foreach ($headers as $index => $header) {
                 if (isset($updatedData[$header])) {
                     $row[$index] = $updatedData[$header];
-                } else {
-                    
-                    $row[$index] = '';
+                }else {
+                    $row[$index] = ''; 
                 }
+
             }
         }
         fputcsv($file, $row); 
@@ -30,5 +29,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     echo json_encode(['status' => 'success', 'message' => 'Team member updated successfully']);
 }
-?>
 ?>
