@@ -322,6 +322,7 @@ function showModalEdit(data){
     form.elements['lastMonthSales'].value = data["Last 12 Months Sales"];
     form.elements['agentPhone'].value = data["Agent Phone"];
     form.elements['agentEmail'].value = data["Agent Email"];
+    form.elements['zillowProfile'].value = data["Zillow Profile"];
     form.elements['zillowReviews'].value = data["Zillow Reviews"];
     form.elements['notes'].value = data["Notes"];
     form.elements['website'].value = data["Website"];
