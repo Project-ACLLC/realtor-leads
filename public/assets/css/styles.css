@@ -1,0 +1,173 @@
+/* styles.css */
+
+/* Add any custom styles here */
+/* Fonts */
+@font-face {
+  font-family: "Kiro Bold";
+  src: url("../fonts/Kiro-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Kiro Regular";
+  src: url("../fonts/Kiro-Regular.otf") format("opentype");
+}
+
+/* Color Scheme */
+:root {
+  --primary-clr: #2b415e;
+  --secondary-clr: #39939d;
+  --vivid-orange-clr: #f2693f;
+  --light-turquoise-clr: #4dc4d1;
+  --slate-blue-clr: #a3b5cc;
+  --light-aqua-clr: #cfe3e6;
+  --pinkish-beige-clr: #f2dfda;
+}
+
+* {
+  color: var(--primary-clr);
+  font-family: "Kiro Regular";
+}
+
+.container {
+  max-width: 100%;
+}
+.container h1 {
+  font-family: "Kiro Bold";
+  font-size: 2rem;
+}
+.container .filter-container label {
+  width: 110px;
+}
+.container .filter-container .search-filter,
+.container .filter-container .state-filter {
+  width: 25ch;
+}
+.container .filter-container .search-filter,
+.container .filter-container .state-filter,
+.container .filter-container .filter-input {
+  border-color: var(--primary-clr);
+}
+.container .filter-container .min-sales,
+.container .filter-container .min-reviews {
+  width: 13ch;
+}
+.container .right-side .add-new .btn {
+  background-color: var(--secondary-clr);
+  border: none;
+  padding: 0.5em 1.5em;
+}
+.container .right-side .add-new .btn:hover {
+  opacity: 0.8;
+}
+.container .right-side .add-new .btn:active {
+  background-color: var(--light-turquoise-clr);
+}
+.container .modal .modal-dialog {
+  max-width: 1125px;
+}
+.container .modal .modal-header {
+  border: none;
+  padding: 1em 2em;
+}
+.container .modal .modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  padding: 1em 2em;
+}
+.container .modal form .form-group {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin: 0;
+}
+.container .modal form .form-group label {
+  width: 25%;
+}
+.container .modal form .form-group .form-control {
+  border-color: var(--primary-clr);
+}
+.container .modal .modal-footer {
+  border: none;
+  padding: 1em 2em;
+}
+.container .modal form .btn {
+  background-color: var(--secondary-clr);
+  border: none;
+  display: block;
+  padding: 0.5em 1.5em;
+  margin: 0;
+  margin-left: auto;
+}
+.container .modal form .btn:hover {
+  opacity: 0.8;
+}
+.container .modal form .btn:active {
+  background-color: var(--light-turquoise-clr);
+}
+.container .team-list .table-responsive {
+  margin-bottom: 2em;
+}
+.container .team-list .table-responsive .table-width {
+  width: 1860px;
+}
+.container .team-list .table-responsive .table thead tr th {
+  background-color: var(--light-aqua-clr);
+}
+.container .team-list .table-responsive .table thead tr th:first-child,
+.container .team-list .table-responsive .table tbody tr td:first-child {
+  display: none;
+}
+.container .team-list .table-responsive .table thead tr th:not(:first-child) {
+  text-align: center;
+}
+.container .team-list .table-responsive .table tbody tr td {
+  vertical-align: middle;
+}
+.container .team-list .table-responsive .table tbody tr td[data-header="Notes"] {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  width: 100px;
+}
+.container .team-list .table-responsive .table tbody tr td:not(:first-child) {
+  text-align: center;
+}
+.container .team-list .table-responsive .table tbody tr td .btn-link {
+  color: var(--secondary-clr);
+}
+.container .team-list .table-responsive .table tbody tr .btn-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.container .team-list .table-responsive .table tbody tr td .btn-info,
+.container .team-list .table-responsive .table tbody tr td .btn-warning {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  padding: 0.5em;
+}
+.container .team-list .table-responsive .table tbody tr td .btn-info:hover,
+.container .team-list .table-responsive .table tbody tr td .btn-warning:hover {
+  opacity: 0.8;
+}
+.container .team-list nav .pagination .page-item .page-link {
+  border-color: var(--primary-clr);
+  color: var(--primary-clr);
+}
+.container .team-list nav .pagination .active .page-link {
+  background-color: var(--primary-clr);
+  border-color: var(--primary-clr);
+  color: #fff;
+}
+
+/* Medias */
+@media screen and (min-width: 1860px) {
+  .container .team-list .table-responsive .table-width {
+    width: 100%;
+  }
+}

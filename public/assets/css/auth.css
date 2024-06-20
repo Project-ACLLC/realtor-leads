@@ -1,0 +1,261 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'Kiro';
+  src: url('../fonts/Kiro-Regular.otf') format('opentype');
+  }
+body#auth {
+  background: #2b415e;
+}
+
+header.auth{
+  display: flex;
+  align-items: center;
+  background: #fff;
+  height: 70px;
+  padding: 0 2ch;
+  font-family: "Kiro";
+  font-size: 35px;
+  box-shadow: 0px 2px 5px -3px rgba(0, 0, 0, 0.5)
+}
+
+header.auth a:hover{
+  text-decoration: none;
+  color: unset;
+}
+
+#auth main {
+  padding: 0 20px;
+}
+
+.log-out {
+  font-family: "Kiro";
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: max-content;
+  background: #fff;
+  font-size: calc(20rem / 16);
+  padding: .3em .8em;
+  border-radius: 5px;
+  margin-left: auto;
+  cursor: pointer;
+  color: unset;
+  text-decoration: none;
+}
+
+
+.icon-logout {
+  width: 30px;
+  height: 30px;
+  display: block;
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M21 12L13 12" stroke="%23323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 15L20.913 12.087V12.087C20.961 12.039 20.961 11.961 20.913 11.913V11.913L18 9" stroke="%23323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 5V4.5V4.5C16 3.67157 15.3284 3 14.5 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H14.5C15.3284 21 16 20.3284 16 19.5V19.5V19" stroke="%23323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>');
+}
+
+.log-out:hover {
+  background: #a3b5cc;
+}
+
+#auth .container {
+  max-width: 650px;
+  margin: 40px auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+#auth h1 {
+  font-family: "Kiro";
+  color: #08101f;
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 20px 0;
+  box-shadow: 0px 2px 5px -3px rgba(0, 0, 0, 0.5)
+}
+
+#auth form {
+  padding: 0 30px;
+}
+
+#auth .button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#auth div.flex {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+
+#auth label {
+  font-family: "Kiro";
+  color: #08101f;
+  font-size: calc(22rem / 16);
+}
+
+#auth input[type="text"], #auth input[type="number"], #auth input[type="password"] {
+  border: 1px solid #d5d6d9;
+  border-radius: 5px;
+  height: 35px;
+  padding: 0 10px; 
+  font-family: "Kiro";
+  font-size: calc(18rem / 16);
+  /* flex: 1; */
+  width: 100%;
+  outline-color: #10B981;
+}
+
+#auth input[type="password"] {
+  padding-right: 35px;
+}
+
+#auth button[type=submit] {
+    width: max-content;
+    background: #10B981;
+    box-shadow: 0px 1px 2px 0px #0000000D;
+    padding: 10px 20px;
+    color: #fff;
+    font-family: Kiro;
+    font-weight: 500;
+    font-size: calc(20rem / 16);
+    line-height: 24px;
+    border: none;
+    border-radius: 6px;
+    margin-bottom: 35px;
+    cursor: pointer;
+    margin-top: 30px auto 0 ;
+}
+
+#auth button[type=submit]:hover {
+  opacity: 0.8;
+}
+/* CUSTOMIZED CHECKBOX CSS */
+
+#auth .form-control {
+  font-family: system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 2em auto;
+  gap: 0.5em;
+  align-items: center;
+}
+
+#auth input[type="checkbox"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.3em;
+  height: 1.3em;
+  border: 0.15em solid #d5d6d9;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+}
+
+#auth .form-control + .form-control {
+  margin-top: 1em;
+}
+
+#auth input[type="checkbox"] {
+  /* ...existing styles */
+  display: grid;
+  place-content: center;
+}
+
+#auth input[type="checkbox"]::before {
+  content: "";
+  width: .7em;
+  height: .7em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #10B981;
+}
+
+#auth input[type="checkbox"]:checked {
+  border: 0.15em solid #10B981;
+}
+
+#auth input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+#auth input[type="checkbox"]::before {
+  /* ...existing styles */
+
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+
+/* END CUSTOMIZED CHECKBOX CSS */
+
+
+#auth .resize-input {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: 30px;
+}
+
+#auth .resize-input > input {
+  width: calc(50% - 45px)
+}
+
+#auth a.back {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #0C2849;
+  font-family: "Kiro";
+  font-size: calc(16rem / 16);
+  font-weight: bold;
+  text-decoration: none;
+  padding: 20px 10px;
+}
+
+#auth a.back::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background: url('data:image/svg+xml,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_1717_241894)"><path d="M17.0624 4.47711C17.4529 4.08658 17.4529 3.45342 17.0624 3.06289L16.7066 2.70711C16.3161 2.31658 15.6829 2.31658 15.2924 2.70711L6.70664 11.2929C6.31611 11.6834 6.31611 12.3166 6.70664 12.7071L15.2924 21.2929C15.6829 21.6834 16.3161 21.6834 16.7066 21.2929L17.0624 20.9371C17.4529 20.5466 17.4529 19.9134 17.0624 19.5229L10.2466 12.7071C9.85611 12.3166 9.85611 11.6834 10.2466 11.2929L17.0624 4.47711Z" fill="%230C2849"/></g><defs><clipPath id="clip0_1717_241894"><rect width="24" height="24" fill="white" transform="matrix(-1 0 0 -1 24 24)"/></clipPath></defs></svg>') center no-repeat;
+}
+
+#auth a.back:hover {
+  opacity: 0.8;
+}
+
+
+#auth .input-quality {
+  display:none; 
+  margin-left:30px; 
+  width: 100%
+}
+
+#auth .icon-password {
+  width: 24px;
+  height: 24px;
+  display: block;
+  background: url('data:image/svg+xml,<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M2 2L22 22" stroke="%23d5d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.71277 6.7226C3.66479 8.79527 2 12 2 12C2 12 5.63636 19 12 19C14.0503 19 15.8174 18.2734 17.2711 17.2884M11 5.05822C11.3254 5.02013 11.6588 5 12 5C18.3636 5 22 12 22 12C22 12 21.3082 13.3317 20 14.8335" stroke="%23d5d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 14.2362C13.4692 14.7112 12.7684 15.0001 12 15.0001C10.3431 15.0001 9 13.657 9 12.0001C9 11.1764 9.33193 10.4303 9.86932 9.88818" stroke="%23d5d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>') center no-repeat;
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  cursor: pointer;
+}
+
+#auth .icon-password.active {
+  background: url('data:image/svg+xml,<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12" stroke="%23d5d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M1 12C1 12 5 20 12 20C19 20 23 12 23 12" stroke="%23d5d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3" stroke="%23d5d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle></g></svg>') center no-repeat;
+}
