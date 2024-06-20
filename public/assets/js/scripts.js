@@ -74,7 +74,7 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '', ag
                 if (headers[cellIndex] === 'Zillow Profile') {
                     table += `<td><button class="btn btn-link" onclick="window.open('${cell}', '_blank')">View Profile</button></td>`;
                 } else if (!['Facebook', 'Instagram', 'LinkedIn', 'Pinterest', 'Twitter', 'YouTube', 'Website', 'Blog'].includes(headers[cellIndex])) {
-                    table += `<td contenteditable="true" data-header="${headers[cellIndex]}">${cell}</td>`;
+                    table += `<td class="table-value" data-header="${headers[cellIndex]}">${cell}</td>`;
                 } 
             });
             table += `<td>
@@ -129,64 +129,6 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '', ag
 async function toggleDetails(id) {
 
     const data = await this.getById(id);
-
-    // const teamList = document.getElementById('teamList');
-
-    // let showSocialDetails = `
-    //     <!-- Modal -->
-    //     <div class="modal fade" id="showSocialDetailsModal" tabindex="-1" role="dialog" aria-labelledby="showSocialDetailsModalTitle" aria-hidden="true">
-    //         <div class="modal-dialog modal-dialog-centered" role="document">
-    //             <div class="modal-content">
-    //                 <div class="modal-header">
-    //                     <h5 class="modal-title" id="showSocialDetailsModalTitle">Details</h5>
-    //                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    //                     <span aria-hidden="true">&times;</span>
-    //                     </button>
-    //                 </div>
-    //                 <form id="viewDetailsForm" action="">
-    //                     <div class="modal-body">
-    //                         <div class="form-group">
-    //                             <label for="website">Website:</label>
-    //                             <input type="text" id="website" class="form-control" name="website" readonly>
-    //                         </div>
-    //                         <div class="form-group">
-    //                             <label for="facebook">Facebook:</label>
-    //                             <input type="text" id="facebook" class="form-control" name="facebook" readonly>
-    //                         </div>
-    //                         <div class="form-group">
-    //                             <label for="pinterest">Pinterest:</label>
-    //                             <input type="text" id="pinterest" class="form-control" name="pinterest" readonly>
-    //                         </div>
-    //                         <div class="form-group">
-    //                             <label for="blog">Blog:</label>
-    //                             <input type="text" id="blog" class="form-control" name="blog" readonly>
-    //                         </div>
-    //                         <div class="form-group">
-    //                             <label for="instagram">Instagram:</label>
-    //                             <input type="text" id="instagram" class="form-control" name="instagram" readonly>
-    //                         </div>
-    //                         <div class="form-group">
-    //                             <label for="twitter">Twitter:</label>
-    //                             <input type="text" id="twitter" class="form-control" name="twitter" readonly>
-    //                         </div>
-    //                         <div class="form-group">
-    //                             <label for="linkedIn">LinkedIn:</label>
-    //                             <input type="text" id="linkedIn" class="form-control" name="linkedIn" readonly>
-    //                         </div>
-    //                         <div class="form-group">
-    //                             <label for="youtube">YouTube:</label>
-    //                             <input type="text" id="youtube" class="form-control" name="youtube" readonly>
-    //                         </div>
-    //                     </div>
-    //                     <div class="modal-footer">
-    //                     </div>
-    //                 </form>
-    //             </div>
-    //         </div>
-    //     </div>
-    // `;
-
-    // teamList.insertAdjacentHTML('beforeend', showSocialDetails);
 
     const form = document.getElementById('viewDetailsForm');
    
@@ -413,76 +355,6 @@ function showModalEdit(data){
         }
     });
 }
-// function updateForm() {
-
-//     var form = document.getElementById("editForm");
-//     const id = form.getAttribute("data-header");
-//     const updatedData = { id: id };
-//     var formData = new FormData(form);
-
-//     // Iterate through the FormData entries
-//     for (var pair of formData.entries()) {
-//         updatedData[pair[0]] = pair[1];
-//     }
-
-//     updatedData["Agent Name"] = updatedData.agentName;
-//     updatedData["Team Name"] = updatedData.teamName;
-//     updatedData["State"] = updatedData.state;
-//     updatedData["Brokerage"] = updatedData.brokerage;
-//     updatedData["Last 12 Months Sales"] = updatedData.lastMonthSales;
-//     updatedData["Agent Phone"] = updatedData.agentPhone;
-//     updatedData["Agent Email"] = updatedData.agentEmail;
-//     updatedData["Zillow Reviews"] = updatedData.zillowReviews;
-//     updatedData["Notes"] = updatedData.notes;
-//     updatedData["Website"] = updatedData.website;
-//     updatedData["Facebook"] = updatedData.facebook;
-//     updatedData["Pinterest"] = updatedData.pinterest;
-//     updatedData["Blog"] = updatedData.blog;
-//     updatedData["Instagram"] = updatedData.instagram;
-//     updatedData["LinkedIn"] = updatedData.linkedIn;
-//     updatedData["YouTube"] = updatedData.youtube;
-//     updatedData["Twitter"] = updatedData.twitter;
-
-//     // Delete the old property
-//     delete updatedData.agentName;
-//     delete updatedData.teamName;
-//     delete updatedData.state;
-//     delete updatedData.brokerage;
-//     delete updatedData.lastMonthSales;
-//     delete updatedData.agentPhone;
-//     delete updatedData.agentEmail;
-//     delete updatedData.zillowReviews;
-//     delete updatedData.notes;
-//     delete updatedData.website;
-//     delete updatedData.facebook;
-//     delete updatedData.pinterest;
-//     delete updatedData.blog;
-//     delete updatedData.instagram;
-//     delete updatedData.linkedIn;
-//     delete updatedData.youtube;
-//     delete updatedData.twitter;
-
-//     fetch('../includes/update.php', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(updatedData)
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         showMessage(data.message);
-//         if (data.status === 'success') {
-//             window.location.href = '';
-//             forUpdateId  = 0;
-//         }
-//     })
-//     .catch(error => {
-//         console.error('Error updating data:', error);
-//         showMessage('Failed to update data.');
-//     });
-
-// }
 function updateForm() {
     var form = document.getElementById("editForm");
     const id = form.getAttribute("data-header");
@@ -545,10 +417,9 @@ function updateForm() {
     });
 }
 
-
 function saveRow(index) {
     const row = document.getElementById(`row-${index}`);
-    const cells = row.querySelectorAll('td[contenteditable="true"]');
+    const cells = row.querySelectorAll('.table-value');
     const updatedData = { id: row.getAttribute('data-id') };
 
     cells.forEach(cell => {
