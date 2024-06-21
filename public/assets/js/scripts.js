@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     loadTeamList(1); // Load the first page by default
     loadStateFilter(); // Load the state filter options
 
+    document.getElementById("creationForm").addEventListener("submit", submitForm);
+
 });
 
 function loadStateFilter() {
@@ -280,7 +282,14 @@ function showCreateForm() {
 }
 
 function submitForm(){
+    event.preventDefault(); 
+
     var form = document.getElementById("creationForm");
+
+    if (form.checkValidity() === false) {
+        form.reportValidity();
+        return;
+    }
 
     var formData = new FormData(form);
 
@@ -288,9 +297,7 @@ function submitForm(){
         method: 'POST',
         body: formData
     })
-    .then(response => {
-        response.json()
-    })
+    .then(response => response.json())
     .then(data => {
         showMessage(data.message);
         loadTeamList(1);
