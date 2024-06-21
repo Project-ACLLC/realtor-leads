@@ -44,7 +44,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <input id="searchByName" type="text" class="search-filter form-control m-0" placeholder="" oninput="filterData()">
                             <i class="search-icon fa fa-magnifying-glass"></i>
                         </div>
-                        <input id="salesFilter" type="text" class="min-sales form-control filter-input m-0" placeholder="Min Sales" maxlength="4" oninput="filterData()">
+                        <!-- <input id="salesFilter" type="text" class="min-sales form-control filter-input m-0" placeholder="Sales" maxlength="4" oninput="filterData()"> -->
+                        <select id="salesFilter" class="min-sales form-control filter-sort" onchange="filterData()">
+                            <option value="" selected disabled>Sales</option>
+                            <option value="highest">Highest</option>
+                            <option value="lowest">Lowest</option>
+                        </select>
                     </div>
                 </div>
                 <div class="d-flex flex-wrap align-items-center gap-3">
@@ -56,7 +61,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <option value="">All States</option>
                             <!-- States will be dynamically loaded here -->
                         </select>
-                        <input id="reviewsFilter" type="text" class="min-reviews form-control filter-input m-0" placeholder="Min Reviews" maxlength="4" oninput="filterData()">
+                        <!-- <input id="reviewsFilter" type="text" class="min-reviews form-control filter-input m-0" placeholder="Min Reviews" maxlength="4" oninput="filterData()"> -->
+                        <select id="reviewsFilter" class="min-reviews form-control filter-sort" onchange="filterData()">
+                            <option value="" selected disabled>Reviews</option>
+                            <option value="highest">Highest</option>
+                            <option value="lowest">Lowest</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -78,7 +88,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </div>
 
         <!-- Details Modal -->
-        <div class="modal fade" id="showSocialDetailsModal" tabindex="-1" role="dialog" aria-labelledby="showSocialDetailsModalTitle" aria-hidden="true">
+        <div class="details-modal modal fade" id="showSocialDetailsModal" tabindex="-1" role="dialog" aria-labelledby="showSocialDetailsModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -91,35 +101,35 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="website">Website:</label>
-                                <input type="text" id="website" class="form-control" name="website" readonly>
+                                <input type="text" id="website" class="form-control read-only" name="website" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="facebook">Facebook:</label>
-                                <input type="text" id="facebook" class="form-control" name="facebook" readonly>
+                                <input type="text" id="facebook" class="form-control read-only" name="facebook" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="pinterest">Pinterest:</label>
-                                <input type="text" id="pinterest" class="form-control" name="pinterest" readonly>
+                                <input type="text" id="pinterest" class="form-control read-only" name="pinterest" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="blog">Blog:</label>
-                                <input type="text" id="blog" class="form-control" name="blog" readonly>
+                                <input type="text" id="blog" class="form-control read-only" name="blog" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="instagram">Instagram:</label>
-                                <input type="text" id="instagram" class="form-control" name="instagram" readonly>
+                                <input type="text" id="instagram" class="form-control read-only" name="instagram" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="twitter">Twitter:</label>
-                                <input type="text" id="twitter" class="form-control" name="twitter" readonly>
+                                <input type="text" id="twitter" class="form-control read-only" name="twitter" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="linkedIn">LinkedIn:</label>
-                                <input type="text" id="linkedIn" class="form-control" name="linkedIn" readonly>
+                                <input type="text" id="linkedIn" class="form-control read-only" name="linkedIn" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="youtube">YouTube:</label>
-                                <input type="text" id="youtube" class="form-control" name="youtube" readonly>
+                                <input type="text" id="youtube" class="form-control read-only" name="youtube" readonly>
                             </div>
                         </div>
                         <div class="modal-footer">
