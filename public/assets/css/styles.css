@@ -30,16 +30,36 @@
 .container {
   max-width: 100%;
 }
-.container h1 {
+.container .filter-container h1 {
   font-family: "Kiro Bold";
   font-size: 2rem;
+  text-align: center;
 }
-.container .filter-container label {
+.container .filter-container .label-container {
   width: 110px;
+}
+.container .filter-container .d-grid {
+  grid-template-columns: 1fr auto;
+}
+.container .filter-container .search-filter-container {
+  position: relative;
+}
+.container .filter-container .search-filter-container .search-filter {
+  /* padding-left: 2rem; */
+}
+.container .filter-container .search-filter-container i {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 .container .filter-container .search-filter,
 .container .filter-container .state-filter {
-  width: 25ch;
+  width: 210px;
 }
 .container .filter-container .search-filter,
 .container .filter-container .state-filter,
@@ -48,17 +68,23 @@
 }
 .container .filter-container .min-sales,
 .container .filter-container .min-reviews {
-  width: 13ch;
+  max-width: 110px;
 }
-.container .right-side .add-new .btn {
+.container .add-new-container {
+  margin: 0 auto;
+}
+.container .message-text {
+  color: #00b100;
+}
+.container .add-new .btn {
   background-color: var(--secondary-clr);
   border: none;
   padding: 0.5em 1.5em;
 }
-.container .right-side .add-new .btn:hover {
+.container .add-new .btn:hover {
   opacity: 0.8;
 }
-.container .right-side .add-new .btn:active {
+.container .add-new .btn:active {
   background-color: var(--light-turquoise-clr);
 }
 .container .modal .modal-dialog {
@@ -70,7 +96,6 @@
 }
 .container .modal .modal-body {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 2em;
   padding: 1em 2em;
 }
@@ -169,5 +194,18 @@
 @media screen and (min-width: 1860px) {
   .container .team-list .table-responsive .table-width {
     width: 100%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .container .modal .modal-body {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (min-width: 360px) {
+  .container .filter-container h1 {
+    text-align: left;
+  }
+  .container .add-new-container {
+    margin: 0;
   }
 }
