@@ -30,6 +30,20 @@ function filterData() {
     loadTeamList(1, state, minSales, minReviews, searchByAgentName);
 }
 
+const searchFilter = document.querySelector('.search-filter');
+const searchFilterContainer = document.querySelector('.search-filter-container');
+const searchIcon = document.querySelector('.search-icon');
+
+searchFilter.addEventListener('click', function() {
+    searchIcon.style.display = 'none';
+});
+
+document.addEventListener('click', function(event) {
+    if (!searchFilterContainer.contains(event.target)) {
+        searchIcon.style.display = 'inline-block';
+    }
+});
+
 function loadTeamList(page, filterState = '', minSales = '', minReviews = '', agentName = '') {
     fetch('../includes/read.php')
     .then(response => response.json())

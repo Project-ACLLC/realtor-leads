@@ -32,41 +32,42 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 </header>
 
     <div class="container mt-5">
-        <div class="d-flex justify-content-between mb-4">
+        <div class="d-flex flex-wrap justify-content-between gap-4 mb-5">
             <div class="filter-container">
-                <h1 class="m-0 mb-3">Realtor Teams Management</h1>
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="d-flex align-items-center gap-2">
-                        <label for="searchByName" class="m-0">Search by Name:</label>
-                        <input id="searchByName" type="text" class="form-control search-filter m-0" placeholder="" oninput="filterData()">
+                <h1 class="m-0 mb-4">Realtor Teams Management</h1>
+                <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+                    <div class="label-container">
+                        <span class="label-text">Search by Name:</span>
                     </div>
-                    <div class="">
+                    <div class="d-grid align-items-center gap-3">
+                        <div class="search-filter-container">
+                            <input id="searchByName" type="text" class="search-filter form-control m-0" placeholder="" oninput="filterData()">
+                            <i class="search-icon fa fa-magnifying-glass"></i>
+                        </div>
                         <input id="salesFilter" type="text" class="min-sales form-control filter-input m-0" placeholder="Min Sales" maxlength="4" oninput="filterData()">
                     </div>
                 </div>
-                <div class="d-flex align-items-center gap-3">
-                    <div class="d-flex align-items-center gap-2">
-                        <label for="stateFilter" class="m-0">Filter by State:</label>
-                        <select id="stateFilter" class="form-control state-filter" onchange="filterData()">
+                <div class="d-flex flex-wrap align-items-center gap-3">
+                    <div class="label-container">
+                        <span class="label-text">Filter by State:</span>
+                    </div>
+                    <div class="d-grid align-items-center gap-3">
+                        <select id="stateFilter" class="state-filter form-control" onchange="filterData()">
                             <option value="">All States</option>
                             <!-- States will be dynamically loaded here -->
                         </select>
-                    </div>
-                    <div class="">
                         <input id="reviewsFilter" type="text" class="min-reviews form-control filter-input m-0" placeholder="Min Reviews" maxlength="4" oninput="filterData()">
                     </div>
                 </div>
             </div>
-            <div class="right-side">
-                <div class="d-flex flex-column justify-content-between h-100">
-                    <div id="message"></div>
-                    <div class="add-new">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showAddNewModal" onclick="showCreateForm()">Add New Realtor Lead</button>
-                    </div>
-                    <!-- <div class="align-self-end">
-                        <span id="recordCount" class="record-count"></span>
-                    </div> -->
+            <div class="add-new-container d-flex flex-column gap-2 mt-auto">
+                <div id="message" class="message-text"></div>
+                <div class="add-new col">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showAddNewModal" onclick="showCreateForm()">Add New Realtor Lead</button>
                 </div>
+                <!-- <div class="align-self-end">
+                    <span id="recordCount" class="record-count"></span>
+                </div> -->
             </div>
         </div>
         <div id="createForm" class="create-form">
