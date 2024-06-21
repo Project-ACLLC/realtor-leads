@@ -44,9 +44,6 @@
 .container .filter-container .search-filter-container {
   position: relative;
 }
-.container .filter-container .search-filter-container .search-filter {
-  /* padding-left: 2rem; */
-}
 .container .filter-container .search-filter-container i {
   position: absolute;
   top: 50%;
@@ -63,12 +60,15 @@
 }
 .container .filter-container .search-filter,
 .container .filter-container .state-filter,
-.container .filter-container .filter-input {
+.container .filter-container .filter-sort {
   border-color: var(--primary-clr);
 }
 .container .filter-container .min-sales,
 .container .filter-container .min-reviews {
   max-width: 110px;
+}
+.container .filter-container .filter-sort option[disabled] {
+  color: transparent;
 }
 .container .add-new-container {
   margin: 0 auto;
@@ -107,9 +107,18 @@
 }
 .container .modal form .form-group label {
   width: 25%;
+  margin: 0;
 }
 .container .modal form .form-group .form-control {
   border-color: var(--primary-clr);
+}
+.container .modal form .form-group .read-only {
+  box-shadow: none;
+  outline: none;
+  cursor: default;
+}
+.container .modal form .form-group .read-only:focus {
+  background-color: #e9ecef;
 }
 .container .modal .modal-footer {
   border: none;
@@ -148,7 +157,13 @@
 .container .team-list .table-responsive .table tbody tr td {
   vertical-align: middle;
 }
-.container .team-list .table-responsive .table tbody tr td[data-header="Notes"] {
+.container
+  .team-list
+  .table-responsive
+  .table
+  tbody
+  tr
+  td[data-header="Notes"] {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -207,5 +222,9 @@
   }
   .container .add-new-container {
     margin: 0;
+  }
+  .container .filter-container .min-sales,
+  .container .filter-container .min-reviews {
+    width: 110px;
   }
 }

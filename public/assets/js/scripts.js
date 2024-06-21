@@ -46,7 +46,7 @@ document.addEventListener('click', function(event) {
     }
 });
 
-function loadTeamList(page, filterState = '', minSales = '', minReviews = '', agentName = '') {
+function loadTeamList(page, filterState = '', salesFilter = '', reviewsFilter = '', agentName = '') {
     fetch('../includes/read.php')
     .then(response => response.json())
     .then(data => {
@@ -55,7 +55,7 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '', ag
         const itemsPerPage = 5; // Change the number of items per page to 5
         let filteredRows = rows;
 
-        if (filterState || minSales || minReviews || agentName) {
+        if (filterState || salesFilter || reviewsFilter || agentName) {
             const stateIndex = headers.indexOf('State');
             const salesIndex = headers.indexOf('Last 12 Months Sales');
             const reviewsIndex = headers.indexOf('Zillow Reviews');
@@ -63,14 +63,34 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '', ag
             
             filteredRows = rows.filter(row => {
                 const stateMatch = filterState ? row[stateIndex] === filterState : true;
-                const salesMatch = minSales ? parseInt(row[salesIndex]) >= parseInt(minSales) : true;
-                const reviewsMatch = minReviews ? parseInt(row[reviewsIndex]) >= parseInt(minReviews) : true;
                 const agentNameMatch = agentName ? row[agentNameIndex].toLowerCase().includes(agentName.toLowerCase()) : true;
-                return stateMatch && salesMatch && reviewsMatch && agentNameMatch;
+                return stateMatch && agentNameMatch;
             });
-        }
 
-        // document.getElementById('recordCount').textContent = `Total Records: ${filteredRows.length}`;
+            if (salesFilter) {
+                filteredRows.sort((a, b) => {
+                    const salesA = parseInt(a[salesIndex]);
+                    const salesB = parseInt(b[salesIndex]);
+                    if (salesFilter === 'highest') {
+                        return salesB - salesA; // Sort descending for highest
+                    } else if (salesFilter === 'lowest') {
+                        return salesA - salesB; // Sort ascending for lowest
+                    }
+                });
+            }
+
+            if (reviewsFilter) {
+                filteredRows.sort((a, b) => {
+                    const reviewsA = parseInt(a[reviewsIndex]);
+                    const reviewsB = parseInt(b[reviewsIndex]);
+                    if (reviewsFilter === 'highest') {
+                        return reviewsB - reviewsA; // Sort descending for highest
+                    } else if (reviewsFilter === 'lowest') {
+                        return reviewsA - reviewsB; // Sort ascending for lowest
+                    }
+                });
+            }
+        }
 
         const totalPages = Math.ceil(filteredRows.length / itemsPerPage);
         const start = (page - 1) * itemsPerPage;
@@ -103,12 +123,6 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '', ag
                     </button>
                 </div>
             </td></tr>`;
-            // table += `<tr id="details-${index}" style="display:none;"><td colspan="${headers.length + 1}">
-            //     <table class="table table-bordered"><tbody>`;
-            // table += `<tr><th>Website</th><td>${row[headers.indexOf('Website')] || ''}</td><th>Blog</th><td>${row[headers.indexOf('Blog')] || ''}</td></tr>`;
-            // table += `<tr><th>Facebook</th><td>${row[headers.indexOf('Facebook')] || ''}</td><th>Instagram</th><td>${row[headers.indexOf('Instagram')] || ''}</td><th>LinkedIn</th><td>${row[headers.indexOf('LinkedIn')] || ''}</td></tr>`;
-            // table += `<tr><th>Pinterest</th><td>${row[headers.indexOf('Pinterest')] || ''}</td><th>Twitter</th><td>${row[headers.indexOf('Twitter')] || ''}</td><th>YouTube</th><td>${row[headers.indexOf('YouTube')] || ''}</td></tr>`;
-            // table += `</tbody></table></td></tr>`;
         });
         table += `</tbody></table></div></div>`;
         
@@ -122,17 +136,17 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '', ag
         }
 
         if (startPage > 1) {
-            pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(1, '${filterState}', '${minSales}', '${minReviews}')">First</a></li>`;
-            pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(${page - 1}, '${filterState}', '${minSales}', '${minReviews}')">Previous</a></li>`;
+            pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(1, '${filterState}', '${salesFilter}', '${reviewsFilter}', '${agentName}')">First</a></li>`;
+            pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(${page - 1}, '${filterState}', '${salesFilter}', '${reviewsFilter}', '${agentName}')">Previous</a></li>`;
         }
 
         for (let i = startPage; i <= endPage; i++) {
-            pagination += `<li class="page-item ${i === page ? 'active' : ''}"><a class="page-link" href="#" onclick="loadTeamList(${i}, '${filterState}', '${minSales}', '${minReviews}')">${i}</a></li>`;
+            pagination += `<li class="page-item ${i === page ? 'active' : ''}"><a class="page-link" href="#" onclick="loadTeamList(${i}, '${filterState}', '${salesFilter}', '${reviewsFilter}', '${agentName}')">${i}</a></li>`;
         }
 
         if (endPage < totalPages) {
-            pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(${page + 1}, '${filterState}', '${minSales}', '${minReviews}')">Next</a></li>`;
-            pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(${totalPages}, '${filterState}', '${minSales}', '${minReviews}')">Last</a></li>`;
+            pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(${page + 1}, '${filterState}', '${salesFilter}', '${reviewsFilter}', '${agentName}')">Next</a></li>`;
+            pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(${totalPages}, '${filterState}', '${salesFilter}', '${reviewsFilter}', '${agentName}')">Last</a></li>`;
         }
 
         pagination += `</ul></nav>`;
@@ -141,6 +155,114 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '', ag
         document.getElementById('recordCount').textContent = `Total Records: ${filteredRows.length}`;
     });
 }
+
+// function loadTeamList(page, filterState = '', minSales = '', minReviews = '', agentName = '') {
+//     fetch('../includes/read.php')
+//     .then(response => response.json())
+//     .then(data => {
+//         const headers = data.headers;
+//         const rows = data.data;
+//         const itemsPerPage = 5; // Change the number of items per page to 5
+//         let filteredRows = rows;
+
+//         if (filterState || minSales || minReviews || agentName) {
+//             const stateIndex = headers.indexOf('State');
+//             const salesIndex = headers.indexOf('Last 12 Months Sales');
+//             const reviewsIndex = headers.indexOf('Zillow Reviews');
+//             const agentNameIndex = headers.indexOf('Agent Name');
+            
+//             filteredRows = rows.filter(row => {
+//                 const stateMatch = filterState ? row[stateIndex] === filterState : true;
+//                 // const salesMatch = minSales ? parseInt(row[salesIndex]) >= parseInt(minSales) : true;
+//                 const reviewsMatch = minReviews ? parseInt(row[reviewsIndex]) >= parseInt(minReviews) : true;
+//                 const agentNameMatch = agentName ? row[agentNameIndex].toLowerCase().includes(agentName.toLowerCase()) : true;
+//                 return stateMatch && reviewsMatch && agentNameMatch;
+//             });
+
+//             if (minSales) {
+//                 filteredRows.sort((a, b) => {
+//                     const salesA = parseInt(a[salesIndex]);
+//                     const salesB = parseInt(b[salesIndex]);
+//                     if (salesFilter === 'highest') {
+//                         return salesB - salesA; // Sort descending for highest
+//                     } else if (salesFilter === 'lowest') {
+//                         return salesA - salesB; // Sort ascending for lowest
+//                     }
+//                 });
+//             }
+//         }
+
+//         // document.getElementById('recordCount').textContent = `Total Records: ${filteredRows.length}`;
+
+//         const totalPages = Math.ceil(filteredRows.length / itemsPerPage);
+//         const start = (page - 1) * itemsPerPage;
+//         const end = start + itemsPerPage;
+//         const paginatedRows = filteredRows.slice(start, end);
+
+//         let table = `<div class="table-responsive"><div class="table-width"><table class="table table-bordered"><thead><tr>`;
+//         headers.forEach(header => {
+//             if (!['Facebook', 'Instagram', 'LinkedIn', 'Pinterest', 'Twitter', 'YouTube', 'Website', 'Blog'].includes(header)) {
+//                 table += `<th>${header}</th>`;
+//             }
+//         });
+//         table += `<th>Actions</th></tr></thead><tbody>`;
+//         paginatedRows.forEach((row, index) => {
+//             table += `<tr id="row-${index}" data-id="${row[0]}">`;
+//             row.forEach((cell, cellIndex) => {
+//                 if (headers[cellIndex] === 'Zillow Profile') {
+//                     table += `<td><button class="btn btn-link" onclick="window.open('${cell}', '_blank')">View Profile</button></td>`;
+//                 } else if (!['Facebook', 'Instagram', 'LinkedIn', 'Pinterest', 'Twitter', 'YouTube', 'Website', 'Blog'].includes(headers[cellIndex])) {
+//                     table += `<td class="table-value" data-header="${headers[cellIndex]}">${cell}</td>`;
+//                 } 
+//             });
+//             table += `<td>
+//                 <div class="btn-wrap">
+//                     <button class="btn btn-info btn-sm" title="Details" data-toggle="modal" data-target="#showSocialDetailsModal" onclick="toggleDetails(${row[0]})">
+//                         <i class="fa fa-info"></i>
+//                     </button>
+//                     <button class="btn btn-warning btn-sm" title="Edit" data-toggle="modal" data-target="#showEditModal" onclick="editRows(${row[0]})">
+//                         <i class="fa fa-edit"></i>
+//                     </button>
+//                 </div>
+//             </td></tr>`;
+//             // table += `<tr id="details-${index}" style="display:none;"><td colspan="${headers.length + 1}">
+//             //     <table class="table table-bordered"><tbody>`;
+//             // table += `<tr><th>Website</th><td>${row[headers.indexOf('Website')] || ''}</td><th>Blog</th><td>${row[headers.indexOf('Blog')] || ''}</td></tr>`;
+//             // table += `<tr><th>Facebook</th><td>${row[headers.indexOf('Facebook')] || ''}</td><th>Instagram</th><td>${row[headers.indexOf('Instagram')] || ''}</td><th>LinkedIn</th><td>${row[headers.indexOf('LinkedIn')] || ''}</td></tr>`;
+//             // table += `<tr><th>Pinterest</th><td>${row[headers.indexOf('Pinterest')] || ''}</td><th>Twitter</th><td>${row[headers.indexOf('Twitter')] || ''}</td><th>YouTube</th><td>${row[headers.indexOf('YouTube')] || ''}</td></tr>`;
+//             // table += `</tbody></table></td></tr>`;
+//         });
+//         table += `</tbody></table></div></div>`;
+        
+//         let pagination = `<nav class="d-flex align-items-center justify-content-between" aria-label="Page navigation"><div class="left-container"><span id="recordCount" class="record-count"></span></div><ul class="pagination m-0">`;
+//         const maxPagesToShow = 5;
+//         let startPage = Math.max(page - Math.floor(maxPagesToShow / 2), 1);
+//         let endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
+
+//         if (endPage - startPage < maxPagesToShow - 1) {
+//             startPage = Math.max(endPage - maxPagesToShow + 1, 1);
+//         }
+
+//         if (startPage > 1) {
+//             pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(1, '${filterState}', '${minSales}', '${minReviews}')">First</a></li>`;
+//             pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(${page - 1}, '${filterState}', '${minSales}', '${minReviews}')">Previous</a></li>`;
+//         }
+
+//         for (let i = startPage; i <= endPage; i++) {
+//             pagination += `<li class="page-item ${i === page ? 'active' : ''}"><a class="page-link" href="#" onclick="loadTeamList(${i}, '${filterState}', '${minSales}', '${minReviews}')">${i}</a></li>`;
+//         }
+
+//         if (endPage < totalPages) {
+//             pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(${page + 1}, '${filterState}', '${minSales}', '${minReviews}')">Next</a></li>`;
+//             pagination += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeamList(${totalPages}, '${filterState}', '${minSales}', '${minReviews}')">Last</a></li>`;
+//         }
+
+//         pagination += `</ul></nav>`;
+
+//         document.getElementById('teamList').innerHTML = table + pagination;
+//         document.getElementById('recordCount').textContent = `Total Records: ${filteredRows.length}`;
+//     });
+// }
 
 async function toggleDetails(id) {
 
