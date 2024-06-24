@@ -27,6 +27,13 @@
   font-family: "Kiro Regular";
 }
 
+/* Header */
+.auth div {
+  font-size: 8vw;
+  line-height: 1;
+}
+
+/* Main */
 .container {
   max-width: 100%;
 }
@@ -152,8 +159,40 @@
 .container .team-list .table-responsive .table tbody tr td:first-child {
   display: none;
 }
-.container .team-list .table-responsive .table thead tr th:not(:first-child) {
+.container .team-list .table-responsive .table thead tr th {
+  position: relative;
   text-align: center;
+}
+.container .team-list .table-responsive .table thead tr th .filter-arrow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.container .team-list .table-responsive .table thead tr th .filter-arrow a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.container .team-list .table-responsive .table thead tr th .filter-arrow a i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8px;
+  overflow: hidden;
+}
+.container .team-list .table-responsive .table thead tr th .filter-arrow a i::before {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 .container .team-list .table-responsive .table tbody tr td {
   vertical-align: middle;
@@ -215,6 +254,11 @@
 @media screen and (min-width: 768px) {
   .container .modal .modal-body {
     grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (min-width: 415px) {
+  .auth div {
+    font-size: 2.2rem;
   }
 }
 @media screen and (min-width: 360px) {
