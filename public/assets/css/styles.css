@@ -111,6 +111,7 @@
 }
 .container .modal form .form-group .form-control {
   border-color: var(--primary-clr);
+  cursor: pointer;
 }
 .container .modal form .form-group .read-only {
   box-shadow: none;
