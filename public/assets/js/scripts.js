@@ -108,7 +108,12 @@ function loadTeamList(page, filterState = '', salesFilter = '', reviewsFilter = 
             table += `<tr id="row-${index}" data-id="${row[0]}">`;
             row.forEach((cell, cellIndex) => {
                 if (headers[cellIndex] === 'Zillow Profile') {
-                    table += `<td><button class="btn btn-link" onclick="window.open('${cell}', '_blank')">View Profile</button></td>`;
+                    if(cell !== ''){
+                        table += `<td><button class="btn btn-link" onclick="window.open('${cell}', '_blank')">View Profile</button></td>`;
+                    }else {
+                        table += `<td></td>`;
+                    }
+                    
                 } else if (!['Facebook', 'Instagram', 'LinkedIn', 'Pinterest', 'Twitter', 'YouTube', 'Website', 'Blog'].includes(headers[cellIndex])) {
                     table += `<td class="table-value" data-header="${headers[cellIndex]}">${cell}</td>`;
                 } 

@@ -20,8 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['pinterest'],
         $_POST['twitter'],
         $_POST['youtube'],
-        $_POST['notes'],
-        "Active"
+        $_POST['notes']
     );
 }
 
@@ -43,8 +42,7 @@ function addNewMember(
     $pinterest,
     $twitter,
     $youtube,
-    $notes,
-    $status
+    $notes
 ) {
     $data = readCSV();
 
@@ -69,8 +67,7 @@ function addNewMember(
         htmlspecialchars($pinterest),
         htmlspecialchars($twitter),
         htmlspecialchars($youtube),
-        htmlspecialchars($notes),
-        $status
+        htmlspecialchars($notes)
     ];
     $data['data'][] = $newEntry;
 
