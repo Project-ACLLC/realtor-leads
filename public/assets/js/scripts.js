@@ -505,6 +505,18 @@ async function editRows(id){
     showModalEdit(result);
     
 }
+function populateSelect(data) {
+    // Get the select element
+    var select = document.getElementById('state');
+
+    // Create a new option element
+    var option = document.createElement('option');
+    option.value = data.state;
+    option.textContent = data.state;
+
+    // Add the option to the select element
+    select.appendChild(option);
+}
 
 function showModalEdit(data){
 
@@ -528,6 +540,15 @@ function showModalEdit(data){
     form.elements['linkedIn'].value = data["LinkedIn"];
     form.elements['youtube'].value = data["YouTube"];
     form.elements['twitter'].value = data["Twitter"];
+
+     // Populate the state select element
+     const stateSelect = form.elements['state'];
+     stateSelect.innerHTML = ''; // Clear any existing options
+     const option = document.createElement('option');
+     option.value = data["State"];
+     option.textContent = data["State"];
+     stateSelect.appendChild(option);
+ 
 
 
     // Agent Phone Format
