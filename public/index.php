@@ -149,7 +149,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="editForm" >
+                <form id="editForm">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="agentName">Agent Name:</label>
@@ -161,7 +161,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         </div>
                         <div class="form-group">
                             <label for="state">State:</label>
-                            <input type="text" id="state" class="form-control" name="state" required>
+                            <select id="state" class="state form-control" name="state" required>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="brokerage">Brokerage:</label>

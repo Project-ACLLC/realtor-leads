@@ -281,11 +281,22 @@ async function toggleDetails(id) {
 
 }
 
+// US States
+const states = [
+    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
+    "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
+    "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan",
+    "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
+    "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma",
+    "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas",
+    "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
+];
+
 function showCreateForm() {
     const createForm = document.getElementById('createForm');
 
     let showFormModal = `
-        <!-- Modal -->
+        <!-- Add New Realtor Lead Modal -->
         <div class="modal fade" id="showAddNewModal" tabindex="-1" role="dialog" aria-labelledby="showAddNewModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -307,7 +318,8 @@ function showCreateForm() {
                         </div>
                         <div class="form-group">
                             <label for="state">State:</label>
-                            <input type="text" id="state" class="form-control" name="state" required>
+                            <select id="state" class="state form-control" name="state" required>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="brokerage">Brokerage:</label>
@@ -401,7 +413,42 @@ function showCreateForm() {
             e.target.value = value;
         }
     });
+
+    let optionsAppended = false;
+    const showStates = document.querySelector('.state');
+
+    showStates.addEventListener('click', function(event) {
+        const stateSelect = event.target;
+
+        if (!optionsAppended) {
+            states.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.textContent = state;
+                stateSelect.appendChild(option);
+            });
+            optionsAppended = true;
+        }
+    });
 }
+
+let optionsAppended = false;
+const showStates = document.querySelector('.state');
+
+showStates.addEventListener('click', function(event) {
+    const stateSelect = event.target;
+
+    if (!optionsAppended) {
+        states.forEach(state => {
+            const option = document.createElement('option');
+            option.value = state;
+            option.textContent = state;
+            option.selected = true;
+            stateSelect.appendChild(option);
+        });
+        optionsAppended = true;
+    }
+});
 
 function submitForm(){
     event.preventDefault(); 
