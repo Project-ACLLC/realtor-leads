@@ -45,7 +45,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <i class="search-icon fa fa-magnifying-glass"></i>
                         </div>
                         <!-- <input id="salesFilter" type="text" class="min-sales form-control filter-input m-0" placeholder="Sales" maxlength="4" oninput="filterData()"> -->
-                        <select id="salesFilter" class="min-sales form-control filter-sort" onchange="filterData()">
+                        <select id="salesFilter" class="min-sales form-control filter-sort" onchange="salesFilterSort(this.value)">
                             <option value="" selected disabled>Sales</option>
                             <option value="highest">Highest Sales</option>
                             <option value="lowest">Lowest Sales</option>
@@ -62,7 +62,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <!-- States will be dynamically loaded here -->
                         </select>
                         <!-- <input id="reviewsFilter" type="text" class="min-reviews form-control filter-input m-0" placeholder="Min Reviews" maxlength="4" oninput="filterData()"> -->
-                        <select id="reviewsFilter" class="min-reviews form-control filter-sort" onchange="filterData()">
+                        <select id="reviewsFilter" class="min-reviews form-control filter-sort" onchange="reviewsFilterSort(this.value)">
                             <option value="" selected disabled>Reviews</option>
                             <option value="highest">Highest Reviews</option>
                             <option value="lowest">Lowest Reviews</option>
