@@ -26,10 +26,20 @@ function loadStateFilter() {
 
 function filterData() {
     const state = document.getElementById('stateFilter').value;
-    const minSales = document.getElementById('salesFilter').value;
-    const minReviews = document.getElementById('reviewsFilter').value;
+    const salesFilter = document.getElementById('salesFilter').value;
+    const reviewsFilter = document.getElementById('reviewsFilter').value;
     const searchByAgentName = document.getElementById('searchByName').value;
-    loadTeamList(1, state, minSales, minReviews, searchByAgentName);
+    loadTeamList(1, state, salesFilter, reviewsFilter, searchByAgentName);
+}
+
+function salesFilterSort(salesFilter) {
+    document.getElementById('reviewsFilter').value = ''; // Reset the reviews filter
+    loadTeamList(1, '', salesFilter, '', '');
+}
+
+function reviewsFilterSort(reviewsFilter) {
+    document.getElementById('salesFilter').value = ''; // Reset the sales filter
+    loadTeamList(1, '', '', reviewsFilter, '');
 }
 
 const searchFilter = document.querySelector('.search-filter');
@@ -60,7 +70,7 @@ function loadTeamList(page, filterState = '', salesFilter = '', reviewsFilter = 
             const salesIndex = headers.indexOf('Last 12 Months Sales');
             const reviewsIndex = headers.indexOf('Zillow Reviews');
             const agentNameIndex = headers.indexOf('Agent Name');
-            
+
             filteredRows = rows.filter(row => {
                 const stateMatch = filterState ? row[stateIndex] === filterState : true;
                 const agentNameMatch = agentName ? row[agentNameIndex].toLowerCase().includes(agentName.toLowerCase()) : true;
@@ -103,10 +113,10 @@ function loadTeamList(page, filterState = '', salesFilter = '', reviewsFilter = 
                 if (header === 'Last 12 Months Sales') {
                     table += `<th>${header} 
                     <span class="filter-arrow">
-                        <a class="arrow-up" onclick="loadTeamList(1, '${filterState}', 'highest', '${reviewsFilter}', '${agentName}')">
+                        <a class="arrow-up" onclick="loadTeamList(${page}, '${filterState}', 'highest', '', '${agentName}')">
                             <i class="fa fa-caret-up"></i>
                         </a>
-                        <a class="arrow-down" onclick="loadTeamList(1, '${filterState}', 'lowest', '${reviewsFilter}', '${agentName}')">
+                        <a class="arrow-down" onclick="loadTeamList(${page}, '${filterState}', 'lowest', '', '${agentName}')">
                             <i class="fa fa-caret-down"></i>
                         </a>
                     </span>
@@ -115,10 +125,10 @@ function loadTeamList(page, filterState = '', salesFilter = '', reviewsFilter = 
                 else if (header === 'Zillow Reviews') {
                     table += `<th>${header} 
                     <span class="filter-arrow">
-                        <a class="arrow-up" onclick="loadTeamList(1, '${filterState}', '${salesFilter}', 'highest', '${agentName}')">
+                        <a class="arrow-up" onclick="loadTeamList(${page}, '${filterState}', '', 'highest', '${agentName}')">
                             <i class="fa fa-caret-up"></i>
                         </a>
-                        <a class="arrow-down" onclick="loadTeamList(1, '${filterState}', '${salesFilter}', 'lowest', '${agentName}')">
+                        <a class="arrow-down" onclick="loadTeamList(${page}, '${filterState}', '', 'lowest', '${agentName}')">
                             <i class="fa fa-caret-down"></i>
                         </a>
                     </span>
